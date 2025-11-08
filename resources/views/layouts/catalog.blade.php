@@ -430,9 +430,20 @@
                                 <a href="{{ route('catalogo.index') }}">Tienda</a>
                                 <ul class="dropdown">
                                     <li><a href="{{ route('catalogo.index') }}">Catálogo de Productos</a></li>
-                                    <li><a href="{{ route('cart.index') }}">Carrito de Compras</a></li>
-                                    <li><a href="#">Lista de Deseos</a></li>
-                                    <li><a href="#">Comparar Productos</a></li>
+                                     <li><a href="#">Productos urgentes</a></li>
+                                    <li><a href="#">Categorías principales</a></li>
+                                   
+                                </ul>
+                            </li>
+                                <li><a href="#">Servicios</a></li>
+
+                             <li class="menu-item-has-children">
+                                <a href="#">Soporte Técnico</a>
+                                <ul class="dropdown">
+                                    
+                                     <li><a href="#">Preguntas frecuentes</a></li>
+                                    <li><a href="#">Conoce nuestras políticas</a></li>
+                                   
                                 </ul>
                             </li>
                             <li><a href="#">Nosotros</a></li>
