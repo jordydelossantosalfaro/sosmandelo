@@ -376,7 +376,7 @@
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{ route('cart.index') }}">Ver carrito</a>
-                                            <a href="#">Checkout</a>
+                                            <a href="#">Pagar</a>
                                         </div>
                                     </div>
                                 </div>

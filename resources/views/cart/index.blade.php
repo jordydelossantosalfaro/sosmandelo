@@ -25,61 +25,52 @@
                     <div class="card-header bg-white">
                         <h5 class="mb-0">Productos en tu carrito</h5>
                     </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-borderless mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th scope="col" class="ps-3">Producto</th>
-                                        <th scope="col" width="120">Precio</th>
-                                        <th scope="col" width="120">Cantidad</th>
-                                        <th scope="col" width="120">Subtotal</th>
-                                        <th scope="col" width="60"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($cartItems as $item)
-                                    <tr>
-                                        <td class="ps-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="me-3" style="width: 60px; height: 60px;">
-                                                    @if($item['product']->images->count() > 0)
-                                                        <img src="{{ asset('storage/' . $item['product']->images->first()->image_path) }}"
-                                                            alt="{{ $item['product']->name }}" class="img-fluid rounded">
-                                                    @else
-                                                        <img src="{{ asset('imgs/no-image.png') }}"
-                                                            alt="No imagen" class="img-fluid rounded">
-                                                    @endif
-                                                </div>
-                                                <div>
-                                                    <h6 class="mb-0">{{ $item['product']->name }}</h6>
-                                                </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            @foreach($cartItems as $item)
+                                <div class="list-group-item py-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-3 col-md-2">
+                                            @if($item['product']->images->count() > 0)
+                                                <img src="{{ asset('storage/' . $item['product']->images->first()->image_path) }}" alt="{{ $item['product']->name }}" class="img-fluid rounded" style="width:48px;height:48px;object-fit:cover;">
+                                            @else
+                                                <img src="{{ asset('imgs/no-image.png') }}" alt="No imagen" class="img-fluid rounded" style="width:48px;height:48px;object-fit:cover;">
+                                            @endif
+                                        </div>
+                                        <div class="col-5 col-md-6">
+                                            <h6 class="mb-1">{{ $item['product']->name }}</h6>
+                                            <div class="text-muted small">S/. {{ number_format($item['price'], 2) }}</div>
+                                        </div>
+                                        <div class="col-4 col-md-4 text-end">
+                                            <div class="d-flex justify-content-end align-items-center">
+                                                <form action="{{ route('cart.update') }}" method="POST" class="me-2 d-inline-flex" style="align-items:center;">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $item['product']->id }}">
+                                                    <input type="hidden" name="quantity" value="{{ max(1, $item['quantity'] - 1) }}">
+                                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="Restar cantidad" aria-label="Restar una unidad de {{ $item['product']->name }}" @if($item['quantity'] <= 1) disabled @endif>-</button>
+                                                </form>
+
+                                                <span class="px-2">{{ $item['quantity'] }}</span>
+
+                                                <form action="{{ route('cart.update') }}" method="POST" class="ms-2 d-inline-flex" style="align-items:center;">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $item['product']->id }}">
+                                                    <input type="hidden" name="quantity" value="{{ $item['quantity'] + 1 }}">
+                                                    <button class="btn btn-sm btn-outline-secondary" type="submit" title="Sumar cantidad" aria-label="Sumar una unidad de {{ $item['product']->name }}">+</button>
+                                                </form>
                                             </div>
-                                        </td>
-                                        <td>{{ number_format($item['price'], 2) }}</td>
-                                        <td>
-                                            <form action="{{ route('cart.update') }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $item['product']->id }}">
-                                                <div class="input-group input-group-sm">
-                                                    <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
-                                                        class="form-control form-control-sm">
-                                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                                        <i class="fas fa-sync-alt"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                        <td>{{ number_format($item['subtotal'], 2) }}</td>
-                                        <td>
-                                            <a href="{{ route('cart.remove', $item['product']->id) }}" class="text-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                            <div class="mt-2">
+                                                <strong>Subtotal:</strong> S/. {{ number_format($item['subtotal'], 2) }}
+                                            </div>
+                                            <div class="mt-2">
+                                                <a href="{{ route('cart.remove', $item['product']->id) }}" class="text-danger" title="Eliminar producto" aria-label="Eliminar {{ $item['product']->name }} del carrito">
+                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
