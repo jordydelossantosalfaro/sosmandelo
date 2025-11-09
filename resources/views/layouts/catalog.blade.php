@@ -88,7 +88,7 @@
     <!-- Header -->
     <header class="header-area header-style-1 header-height-2">
         <div class="mobile-promotion">
-            <span>Gran apertura, <strong>hasta 15%</strong> de descuento en todos los productos. Solo <strong>3 días</strong> restantes</span>
+            <span>Entregas en 30 minutos en Trujillo</span>
         </div>
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
