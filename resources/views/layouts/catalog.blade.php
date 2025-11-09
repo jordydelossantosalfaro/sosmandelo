@@ -10,7 +10,7 @@
     <meta property="og:title" content="@yield('title', config('app.name'))" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:image" content="{{ asset('nest-frontend/assets/imgs/theme/logo.svg') }}" />
+    <meta property="og:image" content="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" />
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('nest-frontend/assets/imgs/theme/favicon.svg') }}" />
@@ -130,7 +130,7 @@
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
                         <a href="{{ route('catalogo.index') }}">
-                            <img src="{{ asset('nest-frontend/assets/imgs/theme/logo.svg') }}" alt="logo" />
+                            <img src="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" alt="logo" />
                         </a>
                     </div>
                     <div class="header-right">
@@ -253,7 +253,7 @@
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
                         <a href="{{ route('catalogo.index') }}">
-                            <img src="{{ asset('nest-frontend/assets/imgs/theme/logo.svg') }}" alt="logo" />
+                            <img src="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" alt="logo" />
                         </a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
@@ -405,7 +405,7 @@
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
                     <a href="{{ route('catalogo.index') }}">
-                        <img src="{{ asset('nest-frontend/assets/imgs/theme/logo.svg') }}" alt="logo" />
+                        <img src="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" alt="logo" />
                     </a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
@@ -452,23 +452,18 @@
                     </nav>
                 </div>
                 <div class="mobile-header-info-wrap">
+                    
                     <div class="single-mobile-header-info">
-                        <a href="#"><i class="fi-rs-marker"></i> Nuestra ubicación </a>
+                        <a href="mailto:sosmandelo@sosmandelo.com"><i class="fi-rs-email"></i>sosmandelo@sosmandelo.com</a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#"><i class="fi-rs-user"></i>Iniciar Sesión / Registrarse </a>
-                    </div>
-                    <div class="single-mobile-header-info">
-                        <a href="#"><i class="fi-rs-headphones"></i>(+01) - 2345 - 6789 </a>
+                        <a href="https://wa.me/51925996974"><i class="fi-rs-headphones"></i>+51925996974</a>
                     </div>
                 </div>
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Síguenos</h6>
-                    <a href="#"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-twitter-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-pinterest-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-youtube-white.svg') }}" alt="" /></a>
+                    <a href="https://web.facebook.com/sosmandelo"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
+                    <a href="https://www.instagram.com/sosmandelo/"><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright {{ date('Y') }} © {{ config('app.name') }}. Todos los derechos reservados.</div>
             </div>
@@ -585,7 +580,7 @@
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
                             <div class="logo mb-30">
                                 <a href="{{ route('catalogo.index') }}" class="mb-15">
-                                    <img src="{{ asset('nest-frontend/assets/imgs/theme/logo.svg') }}" alt="logo" />
+                                    <img src="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" alt="logo" />
                                 </a>
                                 <p class="font-lg text-heading">{{ config('app.name') }} - Tu tienda de confianza</p>
                             </div>
