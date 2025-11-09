@@ -99,7 +99,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('products.index')->with('success', 'Producto creado correctamente.');
+        return redirect()->route('admin.products.index')->with('success', 'Producto creado correctamente.');
     }
 
     /**
@@ -200,7 +200,7 @@ class ProductController extends Controller
             }
         }
 
-        return redirect()->route('products.index')->with('success', 'Producto actualizado correctamente.');
+        return redirect()->route('admin.products.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     /**
@@ -208,7 +208,27 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            // Eliminar imágenes físicas
+            foreach ($product->images as $image) {
+                if ($image->image_path && Storage::disk('public')->exists($image->image_path)) {
+                    Storage::disk('public')->delete($image->image_path);
+                }
+            }
+
+            // Eliminar relaciones y el producto
+            $product->images()->delete();
+            $product->tags()->detach();
+            $product->delete();
+
+            return redirect()
+                ->route('admin.products.index')
+                ->with('success', 'Producto eliminado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()
+                ->route('admin.products.index')
+                ->with('error', 'Error al eliminar el producto: ' . $e->getMessage());
+        }
     }
 
     public function destroyImage($productId, $imageId)

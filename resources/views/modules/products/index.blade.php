@@ -1,5 +1,42 @@
 @section('title', 'Productos')
 @extends('layouts.app')
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: "{{ session('success') }}",
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: "{{ session('error') }}",
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            @endif
+        });
+    </script>
+@endpush
+
+@push('styles')
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+@endpush
+
+@push('scripts')
+    <!-- jQuery y SweetAlert2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endpush
 @section('content')
     <div class="content-header">
         <div>
@@ -16,6 +53,20 @@
             </a>
         </div>
     </div>
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <div class="card mb-4">
         <header class="card-header">
             <div class="row gx-3">
@@ -69,10 +120,25 @@
                         </div>
                         @push('scripts')
                             <script>
-                                // Eliminar producto por AJAX o con confirmación
+                                // Eliminar producto con confirmación SweetAlert2
                                 $(document).on('click', '.btn-eliminar', function(e) {
                                     e.preventDefault();
-                                    alert('No disponible');
+                                    const form = $(this).closest('form');
+                                    
+                                    Swal.fire({
+                                        title: '¿Estás seguro?',
+                                        text: 'Esta acción no se puede deshacer',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Sí, eliminar',
+                                        cancelButtonText: 'Cancelar'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            form.submit();
+                                        }
+                                    });
                                 });
                             </script>
                         @endpush

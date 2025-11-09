@@ -15,7 +15,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3">
-                    <form id="form-supplier-category" data-store-url="{{ route('supplier_categories.store') }}">
+                    <form id="form-supplier-category" data-store-url="{{ route('admin.supplier_categories.store') }}">
                         <input type="hidden" name="id" id="supplier_category_id" />
                         <div class="mb-4">
                             <label for="supplier_category_name" class="form-label">Nombre</label>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="table-responsive">
-                        <table id="supplier-categories-table" class="table table-hover" data-url="{{ route('supplier_categories.data') }}">
+                        <table id="supplier-categories-table" class="table table-hover" data-url="{{ route('admin.supplier_categories.data') }}">
                             <thead>
                                 <tr>
                                     <th>ID</th>

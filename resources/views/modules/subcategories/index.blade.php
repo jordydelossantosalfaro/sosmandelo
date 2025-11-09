@@ -16,10 +16,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <form id="form-subcategoria"
-                        data-store-url="{{ route('subcategories.store') }}"
-                        data-update-url="{{ route('subcategories.update', [':id']) }}"
-                        data-show-url="{{ route('subcategories.show', [':id']) }}"
-                        data-delete-url="{{ route('subcategories.destroy', [':id']) }}">
+                        data-store-url="{{ route('admin.subcategories.store') }}"
+                        data-update-url="{{ route('admin.subcategories.update', [':id']) }}"
+                        data-show-url="{{ route('admin.subcategories.show', [':id']) }}"
+                        data-delete-url="{{ route('admin.subcategories.destroy', [':id']) }}">
                         <input type="hidden" name="id" id="subcategory_id" />
                         <div class="mb-4">
                             <label for="subcategory_category_id" class="form-label">Categoría</label>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="table-responsive">
-                        <table id="subcategories-table" class="table table-hover" data-url="{{ route('subcategories.data') }}">
+                        <table id="subcategories-table" class="table table-hover" data-url="{{ route('admin.subcategories.data') }}">
                             <thead>
                                 <tr>
                                     <th>ID</th>

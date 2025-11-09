@@ -59,7 +59,7 @@
             </p>
         </div>
         <div>
-            <a href="{{ route('suppliers.create') }}" class="btn btn-primary btn-sm rounded">
+            <a href="{{ route('admin.suppliers.create') }}" class="btn btn-primary btn-sm rounded">
                 Nuevo Proveedor
             </a>
         </div>
@@ -129,11 +129,11 @@
                                     @endif
                                 </td>
                                 <td class="text-end">
-                                    <a href="{{ route('suppliers.edit', $supplier->id) }}"
+                                    <a href="{{ route('admin.suppliers.edit', $supplier->id) }}"
                                         class="btn btn-xs btn-warning btn-editar me-1" title="Editar">
                                         <i class="material-icons md-edit" style="font-size:16px;vertical-align:middle;"></i>
                                     </a>
-                                    <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST"
+                                    <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')

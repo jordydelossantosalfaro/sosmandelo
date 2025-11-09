@@ -11,7 +11,7 @@
                     {{ $isEdit ? 'Editar Producto' : 'Crear Producto' }}
                 </h2>
                 <div>
-                    <a href="{{ route('products.index') }}" class="btn btn-light rounded font-sm mr-5 text-body hover-up">
+                    <a href="{{ route('admin.products.index') }}" class="btn btn-light rounded font-sm mr-5 text-body hover-up">
                         Cancelar
                     </a>
                     <button type="submit" form="product-form" class="btn btn-md rounded font-sm hover-up">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="card-body">
                     <form id="product-form" method="POST"
-                        action="{{ $isEdit ? route('products.update', $product->id) : route('products.store') }}"
+                        action="{{ $isEdit ? route('admin.products.update', $product->id) : route('admin.products.store') }}"
                         enctype="multipart/form-data">
                         @csrf
                         @if ($isEdit)
@@ -167,7 +167,7 @@
                                                     <button type="button"
                                                         class="btn btn-sm btn-danger p-1 btn-delete-image"
                                                         title="Eliminar imagen" style="position:absolute;top:0;right:0;"
-                                                        data-url="{{ route('products.images.destroy', [$product->id, $img->id]) }}">
+                                                        data-url="{{ route('admin.products.images.destroy', [$product->id, $img->id]) }}">
                                                         &times;
                                                     </button>
                                                 </div>
