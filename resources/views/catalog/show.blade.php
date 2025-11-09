@@ -106,7 +106,7 @@
 @if($relatedProducts->count() > 0)
     <div class="mt-5">
         <h3 class="mb-4">Productos Relacionados</h3>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
             @foreach($relatedProducts as $related)
                 <div class="col">
                     <div class="card h-100 product-card">

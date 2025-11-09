@@ -159,13 +159,7 @@
                                     </a>
                                     <a href="#"><span class="lable ml-0">Comparar</span></a>
                                 </div>
-                                <div class="header-action-icon-2">
-                                    <a href="#">
-                                        <img class="svgInject" alt="{{ config('app.name') }}" src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
-                                        <span class="pro-count blue">6</span>
-                                    </a>
-                                    <a href="#"><span class="lable">Lista de Deseos</span></a>
-                                </div>
+                                
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="{{ route('cart.index') }}">
                                         <img alt="{{ config('app.name') }}" src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
@@ -187,7 +181,7 @@
                                                         </div>
                                                         <div class="shopping-cart-title">
                                                             <h4><a href="#">{{ $details['name'] }}</a></h4>
-                                                            <h4><span>{{ $details['quantity'] }} × </span>${{ number_format((float)$details['price'], 2) }}</h4>
+                                                            <h4><span>{{ $details['quantity'] }} × </span>S/. {{ number_format((float)$details['price'], 2) }}</h4>
                                                         </div>
                                                         <div class="shopping-cart-delete">
                                                             <a href="#"><i class="fi-rs-cross-small"></i></a>
@@ -216,7 +210,7 @@
                                                         }
                                                     }
                                                 @endphp
-                                                <h4>Total <span>${{ number_format($cartTotal, 2) }}</span></h4>
+                                                <h4>Total <span>S/. {{ number_format($cartTotal, 2) }}</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="{{ route('cart.index') }}" class="outline">Ver carrito</a>
@@ -332,12 +326,7 @@
                     </div>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="#">
-                                    <img alt="{{ config('app.name') }}" src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
-                                    <span class="pro-count white">4</span>
-                                </a>
-                            </div>
+                            
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('cart.index') }}">
                                     <img alt="{{ config('app.name') }}" src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
@@ -354,7 +343,7 @@
                                                     </div>
                                                     <div class="shopping-cart-title">
                                                         <h4><a href="#">{{ $details['name'] }}</a></h4>
-                                                        <h3><span>{{ $details['quantity'] }} × </span>${{ number_format((float)$details['price'], 2) }}</h3>
+                                                        <h3><span>{{ $details['quantity'] }} × </span>S/. {{ number_format((float)$details['price'], 2) }}</h3>
                                                     </div>
                                                     <div class="shopping-cart-delete">
                                                         <a href="#"><i class="fi-rs-cross-small"></i></a>
@@ -383,7 +372,7 @@
                                                     }
                                                 }
                                             @endphp
-                                            <h4>Total <span>${{ number_format($mobileCartTotal, 2) }}</span></h4>
+                                            <h4>Total <span>S/. {{ number_format($mobileCartTotal, 2) }}</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{ route('cart.index') }}">Ver carrito</a>

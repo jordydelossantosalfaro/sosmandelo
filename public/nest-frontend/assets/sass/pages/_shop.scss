@@ -296,7 +296,8 @@
 			.add {
 				position: relative;
 				display: inline-block;
-				padding: 6px 20px 6px 20px;
+				/* reduced horizontal padding to make the button narrower */
+				padding: 6px 10px;
 				border-radius: 4px;
 				background-color: $background-3;
 				font-size: 14px;

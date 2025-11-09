@@ -4260,7 +4260,7 @@ table .product-thumbnail img {
 .product-cart-wrap .product-card-bottom .add-cart .add {
   position: relative;
   display: inline-block;
-  padding: 6px 20px 6px 20px;
+  padding: 6px 10px;
   border-radius: 4px;
   background-color: #DEF9EC;
   font-size: 14px;
@@ -5187,7 +5187,7 @@ table .product-thumbnail img {
 }
 
 .button.button-add-to-cart {
-  padding: 8px 40px;
+  padding: 8px 20px;
 }
 
 .product-extra-link2 a {

@@ -8,7 +8,7 @@
         <div class="col-lg-4-5">
             <section class="product-tabs section-padding position-relative">
                 <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>Popular Products</h3>
+                    <h3>Nuestros productos</h3>
                     <ul class="nav nav-tabs links" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link {{ !request()->has('categoria') ? 'active' : '' }}"
@@ -19,7 +19,7 @@
                                     role="tab"
                                     aria-controls="tab-all"
                                     aria-selected="{{ !request()->has('categoria') ? 'true' : 'false' }}">
-                                All
+                                Todos
                             </button>
                         </li>
                         @foreach($categories->take(6) as $index => $category)
@@ -42,7 +42,7 @@
                         @else
                         <div class="row product-grid-4">
                             @foreach($products as $product)
-                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-1-5">
                                 <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
@@ -74,24 +74,14 @@
                                             <a href="{{ route('catalogo.index', ['categoria' => $product->category->id]) }}">{{ $product->category->name }}</a>
                                         </div>
                                         <h2><a href="{{ route('catalogo.producto', $product->id) }}">{{ $product->name }}</a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            @if($product->brand)
-                                            <span class="font-small text-muted">By <a href="{{ route('catalogo.index', ['marca' => $product->brand->id]) }}">{{ $product->brand->name }}</a></span>
-                                            @endif
-                                        </div>
+                                      
                                         <div class="product-card-bottom">
                                             <div class="product-price">
                                                 @if($product->promotional_price && $product->promotional_price < $product->price)
-                                                    <span>${{ number_format($product->promotional_price, 2) }}</span>
-                                                    <span class="old-price">${{ number_format($product->price, 2) }}</span>
+                                                    <span>S/. {{ number_format($product->promotional_price, 2) }}</span>
+                                                    <span class="old-price">S/. {{ number_format($product->price, 2) }}</span>
                                                 @else
-                                                    <span>${{ number_format($product->price, 2) }}</span>
+                                                    <span>S/. {{ number_format($product->price, 2) }}</span>
                                                 @endif
                                             </div>
                                             <div class="add-cart">
@@ -100,7 +90,7 @@
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <input type="hidden" name="quantity" value="1">
                                                     <button type="submit" class="add">
-                                                        <i class="fi-rs-shopping-cart mr-5"></i>Add
+                                                        <i class="fi-rs-shopping-cart mr-5"></i>Agregar
                                                     </button>
                                                 </form>
                                             </div>
