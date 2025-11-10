@@ -3,8 +3,8 @@
 @section('title', 'Carrito de Compras')
 
 @section('content')
-<div class="container py-5">
-    <h1 class="mb-4">Carrito de Compras</h1>
+<div class="container py-3">
+    <h1 class="mb-4">Pedido</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -25,12 +25,12 @@
                     <div class="card-header bg-white">
                         <h5 class="mb-0">Productos en tu carrito</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0.1rem 0.1rem;">
                         <div class="list-group list-group-flush">
                             @foreach($cartItems as $item)
-                                <div class="list-group-item py-3">
+                                <div class="list-group-item" style="padding: 0.25rem 0.5rem;">
                                     <div class="row align-items-center">
-                                        <div class="col-3 col-md-2">
+                                        <div class="col-3 col-md-2 d-flex justify-content-center align-items-center" style="padding: 0.1rem 0.1rem;">
                                             @if($item['product']->images->count() > 0)
                                                 <img src="{{ asset('storage/' . $item['product']->images->first()->image_path) }}" alt="{{ $item['product']->name }}" class="img-fluid rounded" style="width:48px;height:48px;object-fit:cover;">
                                             @else
@@ -38,8 +38,8 @@
                                             @endif
                                         </div>
                                         <div class="col-5 col-md-6">
-                                            <h6 class="mb-1">{{ $item['product']->name }}</h6>
-                                            <div class="text-muted small">S/. {{ number_format($item['price'], 2) }}</div>
+                                            <h6 class="mb-1 text-start">{{ $item['product']->name }}</h6>
+                                            <div class="text-muted small text-start">S/. {{ number_format($item['price'], 2) }}</div>
                                         </div>
                                         <div class="col-4 col-md-4 text-end">
                                             <div class="d-flex justify-content-end align-items-center">
@@ -59,12 +59,13 @@
                                                     <button class="btn btn-sm btn-outline-secondary" type="submit" title="Sumar cantidad" aria-label="Sumar una unidad de {{ $item['product']->name }}">+</button>
                                                 </form>
                                             </div>
-                                            <div class="mt-2">
+                                            <div class="mt-2 text-start">
                                                 <strong>Subtotal:</strong> S/. {{ number_format($item['subtotal'], 2) }}
                                             </div>
                                             <div class="mt-2">
-                                                <a href="{{ route('cart.remove', $item['product']->id) }}" class="text-danger" title="Eliminar producto" aria-label="Eliminar {{ $item['product']->name }} del carrito">
-                                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                                <a href="{{ route('cart.remove', $item['product']->id) }}" class="text-muted opacity-50 small" title="Eliminar producto" aria-label="Eliminar {{ $item['product']->name }} del carrito" style="text-decoration: none;">
+                                                    <i class="fas fa-times" aria-hidden="true"></i>
+                                                    <span class="small ms-1">Eliminar</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -77,10 +78,10 @@
 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('catalogo.index') }}" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-2"></i> Continuar Comprando
+                        <i class="fas fa-arrow-left me-2"></i> Agregar más productos
                     </a>
                     <a href="{{ route('cart.clear') }}" class="btn btn-outline-danger">
-                        <i class="fas fa-trash me-2"></i> Vaciar Carrito
+                        <i class="fas fa-trash me-2"></i> Vaciar pedido
                     </a>
                 </div>
             </div>
@@ -97,15 +98,15 @@
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span>Envío</span>
-                            <span>Calculado en el checkout</span>
+                            <span>Calculado en el Whatsapp</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
-                            <strong>Total</strong>
+                            <strong>Total S/.</strong>
                             <strong>{{ number_format($total, 2) }}</strong>
                         </div>
                         <a href="{{ route('cart.checkout') }}" class="btn btn-primary w-100">
-                            Proceder al Checkout
+                            Registrar pedido
                         </a>
                     </div>
                 </div>

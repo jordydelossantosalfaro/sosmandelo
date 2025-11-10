@@ -5062,7 +5062,7 @@ fieldset:disabled .btn {
 .card-body {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+          flex: 0.1 0.1 auto;
   padding: 1.3rem 1.3rem;
 }
 
