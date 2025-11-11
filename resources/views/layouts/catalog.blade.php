@@ -268,7 +268,7 @@
                                         @foreach($firstHalf as $category)
                                         <li>
                                             <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">
-                                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/category-1.svg') }}" alt="" />
+                                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/aseo.png') }}" alt="" />
                                                 {{ $category->name }}
                                             </a>
                                         </li>

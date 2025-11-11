@@ -4,40 +4,132 @@
 
 @section('content')
 <div class="container mb-30">
-    <div class="row flex-row-reverse">
-        <div class="col-lg-4-5">
+    <div class="row">
+        <div class="col-12">
             <section class="product-tabs section-padding position-relative">
-                <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                    <h3>Nuestros productos</h3>
-                    <ul class="nav nav-tabs links" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link {{ !request()->has('categoria') ? 'active' : '' }}"
-                                    id="nav-tab-all"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#tab-all"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="tab-all"
-                                    aria-selected="{{ !request()->has('categoria') ? 'true' : 'false' }}">
-                                Todos
-                            </button>
-                        </li>
-                        @foreach($categories->take(6) as $index => $category)
-                        <li class="nav-item" role="presentation">
-                            <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}"
-                               class="nav-link {{ request()->categoria == $category->id ? 'active' : '' }}">
-                                {{ $category->name }}
-                            </a>
-                        </li>
-                        @endforeach
-                    </ul>
+                <!-- Categorías movidas arriba del título -->
+                <section class="popular-categories pt-0 pb-1">
+                    <div class="container-fluid px-0 wow animate__animated animate__fadeIn">
+                        <div class="section-title"> 
+                            <div class="title">
+                                <h3 class="mb-2" style="margin-top:0;font-size:1.1rem;">
+                                    Nuestras categorías 
+                                    <i class="fi-rs-angle-double-right" style="color:#28a745; font-size:1rem; animation: slideHint 1.5s ease-in-out infinite;"></i>
+                                </h3>
+                                <a class="show-all" href="{{ route('catalogo.index') }}">
+                                    Todas las categorías
+                                    <i class="fi-rs-angle-right"></i>
+                                </a>
+                            </div>
+                            <style>
+                                @keyframes slideHint {
+                                    0%, 100% { transform: translateX(0); opacity: 0.7; }
+                                    50% { transform: translateX(5px); opacity: 1; }
+                                }
+                            </style>
+                            <div class="slider-arrow slider-arrow-2 flex-right carausel-8-columns-arrow" id="carausel-8-columns-arrows">
+                                <button type="button" class="slider-btn slider-prev btn btn-light btn-sm opacity-75" aria-label="Ver categorías anteriores" title="Anterior">
+                                    <i class="fi-rs-angle-left"></i>
+                                </button>
+                                <button type="button" class="slider-btn slider-next btn btn-light btn-sm opacity-75 ms-2" aria-label="Ver más categorías" title="Siguiente">
+                                    <i class="fi-rs-angle-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carausel-8-columns-cover position-relative">
+                            <div class="" id="carausel-8-columns" style="display:flex; gap:12px; overflow-x:auto; scroll-behavior:smooth; white-space:nowrap; scrollbar-width:none; -ms-overflow-style:none;">
+                                @foreach($categories as $index => $category)
+                                <div class="" style="width:110px; height:110px; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:10px; border:2px solid #28a745; border-radius:12px;">
+                                    <figure class="img-hover-scale overflow-hidden" style="margin:0; height:65px; display:flex; align-items:center; justify-content:center;">
+                                        <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">
+                                            @php
+                                                $categoryNum = $index + 1;  // Sin módulo 10 para permitir más de 10 categorías
+                                                $customIcons = [
+                                                    1 => 'aseo.png',
+                                                    2 => 'audio.png',
+                                                    3 => 'belleza.png',
+                                                    4 => 'calzados.png',
+                                                    5 => 'deporte.png',
+                                                    6 => 'electronica.png',
+                                                    7 => 'ferreteria.png',
+                                                    8 => 'iluminacion.png',
+                                                    9 => 'jardin.png',
+                                                    10 => 'juguete.png',
+                                                    11 => 'libreria.png',
+                                                    12 => 'mascotas.png',
+                                                    13 => 'menaje.png',
+                                                    14 => 'pinturas.png',
+                                                    15 => 'redes.png',
+                                                    16 => 'ropa.png',
+                                                    17 => 'supermercado.png',
+                                                    18 => 'tecnologia.png'
+                                                ];
+                                                
+                                                if (isset($customIcons[$categoryNum])) {
+                                                    $iconPath = 'nest-frontend/assets/imgs/theme/icons/' . $customIcons[$categoryNum];
+                                                } else {
+                                                    $iconPath = 'nest-frontend/assets/imgs/theme/icons/category-' . (($index % 10) + 1) . '.svg';
+                                                }
+                                            @endphp
+                                            <img src="{{ asset($iconPath) }}" alt="{{ $category->name }}" style="max-height:55px; max-width:65px; object-fit:contain;" />
+                                        </a>
+                                    </figure>
+                                    <h6 style="margin:6px 0 0 0; font-size:1.1rem; text-align:center; line-height:1.2;">
+                                        <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">{{ $category->name }}</a>
+                                    </h6>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const scroller = document.getElementById('carausel-8-columns');
+                            const prev = document.querySelector('#carausel-8-columns-arrows .slider-prev');
+                            const next = document.querySelector('#carausel-8-columns-arrows .slider-next');
+                            if (!scroller || !prev || !next) return;
+                            const amount = () => Math.min(360, Math.max(220, Math.floor(scroller.clientWidth * 0.6)));
+                            const scrollToDir = (dir) => scroller.scrollBy({ left: dir * amount(), behavior: 'smooth' });
+                            prev.addEventListener('click', () => scrollToDir(-1));
+                            next.addEventListener('click', () => scrollToDir(1));
+                        });
+                    </script>
+                </section>
+               
+                <!-- Título dinámico de categoría seleccionada -->
+                <div class="mb-3 mt-2">
+                    <h2 class="text-start" style="font-size:1.2rem; font-weight:600; color:#28a745;">
+                        @if(request()->has('categoria'))
+                            @php
+                                $selectedCategory = $categories->firstWhere('id', request()->categoria);
+                            @endphp
+                            {{ $selectedCategory ? $selectedCategory->name : 'Todos los productos' }}
+                        @else
+                            Todos los productos
+                        @endif
+                    </h2>
                 </div>
+
                 <!--End nav-tabs-->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tab-all">
                         @if($products->isEmpty())
-                            <div class="alert alert-warning">
-                                <p>No products found.</p>
+                            <div class="text-center py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 3rem 2rem;">
+                                <div class="mb-4">
+                                    <i class="fi-rs-box" style="font-size: 4rem; color: #28a745; opacity: 0.7;"></i>
+                                </div>
+                                <h3 style="color: #253D4E; font-weight: 600; margin-bottom: 1rem;">
+                                    ¡Estamos preparando algo especial!
+                                </h3>
+                                <p class="text-muted" style="font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+                                    Agregamos productos nuevos rutinariamente. Esta categoría está temporalmente vacía, pero pronto estará llena de opciones increíbles para ti.
+                                </p>
+                                <div class="mt-4">
+                                    <a href="{{ route('catalogo.index') }}" class="btn btn-success" style="background-color: #28a745; border: none; padding: 0.75rem 2rem; border-radius: 8px;">
+                                        <i class="fi-rs-arrow-left me-2"></i>
+                                        Ver todas las categorías
+                                    </a>
+                                </div>
                             </div>
                         @else
                         <div class="row product-grid-4">
@@ -110,124 +202,11 @@
             </section>
             <!--Products Tabs-->
         </div>
-
-        <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-            <div class="sidebar-widget widget-category-2 mb-30">
-                <h5 class="section-title style-1 mb-30">Category</h5>
-                <ul>
-                    @foreach($categories as $category)
-                    <li>
-                        <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}" class="{{ request()->categoria == $category->id ? 'active' : '' }}">
-                            <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/category-1.svg') }}" alt="" />
-                            {{ $category->name }}
-                        </a>
-                        <span class="count">{{ $category->products_count ?? 0 }}</span>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
-            <!-- Fillter By Price -->
-            <div class="sidebar-widget price_range range mb-30">
-                <h5 class="section-title style-1 mb-30">Fill by price</h5>
-                <div class="price-filter">
-                    <div class="price-filter-inner">
-                        <div id="slider-range" class="mb-20"></div>
-                        <div class="d-flex justify-content-between">
-                            <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong></div>
-                            <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-group">
-                    <div class="list-group-item mb-10 mt-10">
-                        @if($brands->count() > 0)
-                        <label class="fw-900">Brand</label>
-                        <div class="custome-checkbox">
-                            @foreach($brands->take(5) as $brand)
-                            <input class="form-check-input" type="checkbox" name="checkbox" id="brand{{ $brand->id }}" value="{{ $brand->id }}" {{ request()->marca == $brand->id ? 'checked' : '' }} />
-                            <label class="form-check-label" for="brand{{ $brand->id }}"><span>{{ $brand->name }}</span></label>
-                            <br />
-                            @endforeach
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
-            </div>
-            <!-- Product sidebar Widget -->
-            <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
-                <h5 class="section-title style-1 mb-30">New products</h5>
-                @php
-                    $newProducts = \App\Models\Product::latest()
-                        ->take(3)
-                        ->get();
-                @endphp
-                @foreach($newProducts as $newProduct)
-                <div class="single-post clearfix">
-                    <div class="image">
-                        @if($newProduct->images->count() > 0)
-                            <img src="{{ asset('storage/' . $newProduct->images->first()->image_path) }}" alt="{{ $newProduct->name }}" />
-                        @else
-                            <img src="{{ asset('nest-frontend/assets/imgs/shop/thumbnail-3.jpg') }}" alt="{{ $newProduct->name }}" />
-                        @endif
-                    </div>
-                    <div class="content pt-10">
-                        <h5><a href="{{ route('catalogo.producto', $newProduct->id) }}">{{ Str::limit($newProduct->name, 30) }}</a></h5>
-                        <p class="price mb-0 mt-5">${{ number_format($newProduct->promotional_price ?? $newProduct->price, 2) }}</p>
-                        <div class="product-rate">
-                            <div class="product-rating" style="width: 90%"></div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
-                <img src="{{ asset('nest-frontend/assets/imgs/banner/banner-11.png') }}" alt="" />
-                <div class="banner-text">
-                    <span>Oganic</span>
-                    <h4>
-                        Save 17% <br />
-                        on <span class="text-brand">Oganic</span><br />
-                        Juice
-                    </h4>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <!--End container-->
 
-<section class="popular-categories section-padding">
-    <div class="container wow animate__animated animate__fadeIn">
-        <div class="section-title">
-            <div class="title">
-                <h3>Shop by Categories</h3>
-                <a class="show-all" href="{{ route('catalogo.index') }}">
-                    All Categories
-                    <i class="fi-rs-angle-right"></i>
-                </a>
-            </div>
-            <div class="slider-arrow slider-arrow-2 flex-right carausel-8-columns-arrow" id="carausel-8-columns-arrows"></div>
-        </div>
-        <div class="carausel-8-columns-cover position-relative">
-            <div class="carausel-8-columns" id="carausel-8-columns">
-                @foreach($categories as $index => $category)
-                <div class="card-1">
-                    <figure class="img-hover-scale overflow-hidden">
-                        <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">
-                            <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/category-' . (($index % 10) + 1) . '.svg') }}" alt="{{ $category->name }}" />
-                        </a>
-                    </figure>
-                    <h6>
-                        <a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">{{ $category->name }}</a>
-                    </h6>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</section>
-<!--End category slider-->
+<!-- Sección de categorías movida más arriba -->
 
 <section class="section-padding mb-30">
     <div class="container">
@@ -239,43 +218,7 @@
                     ->chunk(3);
             @endphp
             @foreach($topSellingProducts as $chunk)
-            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 wow animate__animated animate__fadeIn" data-wow-delay=".{{ $loop->index }}s">
-                <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
-                <div class="product-list-small animated animated">
-                    @foreach($chunk as $product)
-                    <article class="row align-items-center hover-up">
-                        <figure class="col-md-4 mb-0">
-                            <a href="{{ route('catalogo.producto', $product->id) }}">
-                                @if($product->images->count() > 0)
-                                    <img src="{{ asset('storage/' . $product->images->first()->image_path) }}" alt="{{ $product->name }}" />
-                                @else
-                                    <img src="{{ asset('nest-frontend/assets/imgs/shop/thumbnail-1.jpg') }}" alt="{{ $product->name }}" />
-                                @endif
-                            </a>
-                        </figure>
-                        <div class="col-md-8 mb-0">
-                            <h6>
-                                <a href="{{ route('catalogo.producto', $product->id) }}">{{ Str::limit($product->name, 40) }}</a>
-                            </h6>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
-                                </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            </div>
-                            <div class="product-price">
-                                @if($product->promotional_price && $product->promotional_price < $product->price)
-                                    <span>${{ number_format($product->promotional_price, 2) }}</span>
-                                    <span class="old-price">${{ number_format($product->price, 2) }}</span>
-                                @else
-                                    <span>${{ number_format($product->price, 2) }}</span>
-                                @endif
-                            </div>
-                        </div>
-                    </article>
-                    @endforeach
-                </div>
-            </div>
+            
             @endforeach
         </div>
     </div>
