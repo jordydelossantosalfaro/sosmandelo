@@ -163,26 +163,28 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="{{ route('catalogo.index', ['categoria' => $product->category->id]) }}">{{ $product->category->name }}</a>
+                                            <a href="{{ route('catalogo.index', ['categoria' => $product->category->id]) }}" style="color: #7E7E7E; font-size: 0.85rem;">{{ $product->category->name }}</a>
                                         </div>
-                                        <h2><a href="{{ route('catalogo.producto', $product->id) }}">{{ $product->name }}</a></h2>
+                                        <h2 style="font-size: 1rem; line-height: 1.3; margin-bottom: 0.75rem;">
+                                            <a href="{{ route('catalogo.producto', $product->id) }}" style="color: #253D4E;">{{ $product->name }}</a>
+                                        </h2>
                                       
-                                        <div class="product-card-bottom">
-                                            <div class="product-price">
+                                        <div class="product-card-bottom" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                            <div class="product-price" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap;">
                                                 @if($product->promotional_price && $product->promotional_price < $product->price)
-                                                    <span>S/. {{ number_format($product->promotional_price, 2) }}</span>
-                                                    <span class="old-price">S/. {{ number_format($product->price, 2) }}</span>
+                                                    <span style="color: #28a745; font-weight: 700; font-size: 1.1rem; white-space: nowrap;">S/. {{ number_format($product->promotional_price, 2) }}</span>
+                                                    <span class="old-price" style="color: #adadad; font-size: 0.9rem; white-space: nowrap;">S/. {{ number_format($product->price, 2) }}</span>
                                                 @else
-                                                    <span>S/. {{ number_format($product->price, 2) }}</span>
+                                                    <span style="color: #28a745; font-weight: 700; font-size: 1.1rem; white-space: nowrap;">S/. {{ number_format($product->price, 2) }}</span>
                                                 @endif
                                             </div>
-                                            <div class="add-cart">
-                                                <form action="{{ route('cart.add') }}" method="POST" class="d-inline">
+                                            <div class="add-cart" style="width: 100%;">
+                                                <form action="{{ route('cart.add') }}" method="POST" class="d-inline" style="width: 100%;">
                                                     @csrf
                                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <input type="hidden" name="quantity" value="1">
-                                                    <button type="submit" class="add">
-                                                        <i class="fi-rs-shopping-cart mr-5"></i>Agregar
+                                                    <button type="submit" class="add" style="background-color: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; width: 100%; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.3rem; transition: background-color 0.3s;">
+                                                        <i class="fi-rs-shopping-cart" style="font-size: 1rem;"></i>Agregar
                                                     </button>
                                                 </form>
                                             </div>
