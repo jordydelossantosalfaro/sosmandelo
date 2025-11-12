@@ -109,15 +109,54 @@ class ProductController extends Controller
     {
         $product->load(['images', 'tags', 'category', 'subcategory', 'brand']);
 
-        // Obtener productos relacionados (de la misma categoría o marca)
-        $relatedProducts = Product::where('id', '!=', $product->id)
-            ->where(function($query) use ($product) {
-                $query->where('category_id', $product->category_id)
-                    ->orWhere('brand_id', $product->brand_id);
-            })
-            ->with('images')
-            ->limit(4)
-            ->get();
+        // Obtener productos relacionados priorizando familia del producto
+        $relatedProducts = collect();
+
+        // 1. Productos de la misma subcategoría (misma familia exacta)
+        if ($product->subcategory_id) {
+            $sameSubcategory = Product::where('id', '!=', $product->id)
+                ->where('subcategory_id', $product->subcategory_id)
+                ->with(['images', 'category', 'subcategory', 'brand'])
+                ->limit(6)
+                ->get();
+            $relatedProducts = $relatedProducts->concat($sameSubcategory);
+        }
+
+        // 2. Si necesitamos más productos, agregar de la misma categoría pero diferente subcategoría
+        if ($relatedProducts->count() < 8) {
+            $sameCategory = Product::where('id', '!=', $product->id)
+                ->where('category_id', $product->category_id)
+                ->where('subcategory_id', '!=', $product->subcategory_id)
+                ->with(['images', 'category', 'subcategory', 'brand'])
+                ->limit(8 - $relatedProducts->count())
+                ->get();
+            $relatedProducts = $relatedProducts->concat($sameCategory);
+        }
+
+        // 3. Si aún necesitamos más, agregar productos de la misma marca
+        if ($relatedProducts->count() < 8) {
+            $sameBrand = Product::where('id', '!=', $product->id)
+                ->where('brand_id', $product->brand_id)
+                ->where('category_id', '!=', $product->category_id)
+                ->with(['images', 'category', 'subcategory', 'brand'])
+                ->limit(8 - $relatedProducts->count())
+                ->get();
+            $relatedProducts = $relatedProducts->concat($sameBrand);
+        }
+
+        // 4. Como último recurso, productos aleatorios
+        if ($relatedProducts->count() < 8) {
+            $randomProducts = Product::where('id', '!=', $product->id)
+                ->whereNotIn('id', $relatedProducts->pluck('id'))
+                ->with(['images', 'category', 'subcategory', 'brand'])
+                ->inRandomOrder()
+                ->limit(8 - $relatedProducts->count())
+                ->get();
+            $relatedProducts = $relatedProducts->concat($randomProducts);
+        }
+
+        // Remover duplicados y limitar a 8 productos únicos
+        $relatedProducts = $relatedProducts->unique('id')->take(8);
 
         return view('catalog.show', compact('product', 'relatedProducts'));
     }

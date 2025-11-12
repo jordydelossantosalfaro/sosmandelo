@@ -4250,7 +4250,7 @@ table .product-thumbnail img {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-top: 15px;
+  margin-top: -19px;
 }
 
 .product-cart-wrap .product-card-bottom .git {
@@ -4346,11 +4346,6 @@ table .product-thumbnail img {
 }
 
 .product-cart-wrap:hover .product-img-action-wrap .product-img a img.hover-img {
-  opacity: 1;
-  visibility: visible;
-}
-
-.product-cart-wrap:hover .product-img-action-wrap .product-action-1 {
   opacity: 1;
   visibility: visible;
 }

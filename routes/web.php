@@ -94,3 +94,6 @@ Route::prefix('catalogo')->name('catalogo.')->group(function () {
     Route::get('/', [ProductController::class, 'catalog'])->name('index'); // Listado de productos
     Route::get('/producto/{product}', [ProductController::class, 'show'])->name('producto'); // Detalle de producto
 });
+
+// Ruta para registro de socios (proveedores y repartidores)
+Route::post('/partner-register', [App\Http\Controllers\PartnerController::class, 'register'])->name('partner.register');

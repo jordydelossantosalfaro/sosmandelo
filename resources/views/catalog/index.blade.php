@@ -183,9 +183,6 @@
                                                 @endif
                                             </a>
                                         </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn" href="{{ route('catalogo.producto', $product->id) }}"><i class="fi-rs-eye"></i></a>
-                                        </div>
                                         @if($product->promotional_price && $product->promotional_price < $product->price)
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="best">-{{ number_format((($product->price - $product->promotional_price) / $product->price) * 100, 0) }}%</span>
@@ -241,20 +238,6 @@
 
 <!-- Sección de categorías movida más arriba -->
 
-<section class="section-padding mb-30">
-    <div class="container">
-        <div class="row">
-            @php
-                $topSellingProducts = \App\Models\Product::latest()
-                    ->take(9)
-                    ->get()
-                    ->chunk(3);
-            @endphp
-            @foreach($topSellingProducts as $chunk)
-            
-            @endforeach
-        </div>
-    </div>
-</section>
+
 <!--End 4 columns-->
 @endsection

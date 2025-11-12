@@ -467,42 +467,10 @@
 
     <!-- Footer -->
     <footer class="main">
-        <section class="newsletter mb-15">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="position-relative newsletter-inner">
-                            <div class="newsletter-content">
-                                <h2 class="mb-20">
-                                    Quédate en casa y obtén tus <br />
-                                    necesidades diarias desde nuestra tienda
-                                </h2>
-                                <p class="mb-45">Comienza tus compras diarias con <span class="text-brand">{{ config('app.name') }}</span></p>
-                                <form class="form-subcriber d-flex">
-                                    <input type="email" placeholder="Tu dirección de email" />
-                                    <button class="btn" type="submit">Suscribirse</button>
-                                </form>
-                            </div>
-                            <img src="{{ asset('nest-frontend/assets/imgs/banner/banner-9.png') }}" alt="newsletter" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <section class="featured section-padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 mb-md-4 mb-xl-0">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay="0">
-                            <div class="banner-icon">
-                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-1.svg') }}" alt="" />
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Mejor precio & ofertas</h3>
-                                <p>Pedidos sobre $10</p>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                         <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                             <div class="banner-icon">
@@ -510,52 +478,210 @@
                             </div>
                             <div class="banner-text">
                                 <h3 class="icon-box-title">Entrega gratuita</h3>
-                                <p>Servicio 24/7</p>
+                                <p>Solo en zonas seleccionadas en el rango de horario 6pm a 9pm.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
-                            <div class="banner-icon">
-                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-3.svg') }}" alt="" />
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Ofertas diarias</h3>
-                                <p>Al registrarte</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
-                            <div class="banner-icon">
-                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-4.svg') }}" alt="" />
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Amplio surtido</h3>
-                                <p>Mega descuentos</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
-                            <div class="banner-icon">
-                                <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-5.svg') }}" alt="" />
-                            </div>
-                            <div class="banner-text">
-                                <h3 class="icon-box-title">Devoluciones fáciles</h3>
-                                <p>Dentro de 30 días</p>
-                            </div>
-                        </div>
-                    </div>
+                    
+            
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-xl-none">
                         <div class="banner-left-icon d-flex align-items-center wow animate__animated animate__fadeInUp" data-wow-delay=".5s">
                             <div class="banner-icon">
                                 <img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-6.svg') }}" alt="" />
                             </div>
                             <div class="banner-text">
-                                <h3 class="icon-box-title">Entrega segura</h3>
-                                <p>Dentro de 30 días</p>
+                                <h3 class="icon-box-title">Entrega y pago seguros</h3>
+                                <p>Paga al momento de recibir tu pedido</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="newsletter mb-15">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="position-relative newsletter-inner">
+                            <div class="newsletter-content">
+                                <h2 class="mb-20">
+                                    Únete como nuestro socio proveedor o repartidor<br />
+                                   
+                                </h2>
+                                <p class="mb-30">Comienza a generar ganancias con <span class="text-brand">{{ config('app.name') }}</span></p>
+                                
+                                @if(session('success'))
+                                    <div class="alert alert-success mb-3" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 8px; border: 1px solid #c3e6cb;">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+                                
+                                @if(session('error'))
+                                    <div class="alert alert-danger mb-3" style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 8px; border: 1px solid #f5c6cb;">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
+
+                                <form action="{{ route('partner.register') }}" method="POST" class="form-subcriber partner-form" 
+                                      style="display: flex; flex-direction: column; gap: 15px; max-width: 500px;" 
+                                      onsubmit="return validatePartnerForm(this)">
+                                    @csrf
+                                    
+                                    <div class="form-row" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                        <input type="text" name="nombre_completo" placeholder="Nombre completo *" required 
+                                               class="form-input @error('nombre_completo') error @enderror" 
+                                               style="flex: 1; min-width: 200px; padding: 12px 20px; border: 1px solid {{ $errors->has('nombre_completo') ? '#dc3545' : '#ddd' }}; border-radius: 8px; font-size: 14px; transition: border-color 0.3s; background: white;" 
+                                               value="{{ old('nombre_completo') }}" />
+                                        
+                                        <div class="whatsapp-input" style="display: flex; align-items: center; background: white; border: 1px solid {{ $errors->has('whatsapp') ? '#dc3545' : '#ddd' }}; border-radius: 8px; padding: 0 10px; transition: border-color 0.3s;">
+                                            <span style="color: #666; font-size: 14px; white-space: nowrap; font-weight: 500;">+51</span>
+                                            <input type="tel" name="whatsapp" placeholder="925996974 *" required 
+                                                   pattern="[0-9]{9}" maxlength="9" 
+                                                   class="whatsapp-number @error('whatsapp') error @enderror"
+                                                   style="border: none; outline: none; padding: 12px 10px; font-size: 14px; width: 120px; background: transparent;" 
+                                                   value="{{ old('whatsapp') }}" 
+                                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0,9)" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                        <input type="email" name="email" placeholder="Tu dirección de email *" required 
+                                               class="form-input @error('email') error @enderror"
+                                               style="flex: 2; min-width: 250px; padding: 12px 20px; border: 1px solid {{ $errors->has('email') ? '#dc3545' : '#ddd' }}; border-radius: 8px; font-size: 14px; transition: border-color 0.3s; background: white;" 
+                                               value="{{ old('email') }}" />
+                                        
+                                        <select name="tipo_socio" required 
+                                                class="form-select @error('tipo_socio') error @enderror"
+                                                style="flex: 1; min-width: 150px; padding: 12px 15px; border: 1px solid {{ $errors->has('tipo_socio') ? '#dc3545' : '#ddd' }}; border-radius: 8px; font-size: 14px; background: white; transition: border-color 0.3s; cursor: pointer;">
+                                            <option value="">Selecciona *</option>
+                                            <option value="proveedor" {{ old('tipo_socio') == 'proveedor' ? 'selected' : '' }}>Proveedor</option>
+                                            <option value="repartidor" {{ old('tipo_socio') == 'repartidor' ? 'selected' : '' }}>Repartidor</option>
+                                        </select>
+                                    </div>
+                                    
+                                    @if($errors->any())
+                                        <div class="form-errors" style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 8px; border: 1px solid #f5c6cb; font-size: 14px;">
+                                            <ul style="margin: 0; padding-left: 20px;">
+                                                @foreach($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    
+                                    <button class="btn partner-submit-btn" type="submit" 
+                                            style="align-self: flex-start; padding: 12px 30px; background: #3BB77E; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s; position: relative; min-width: 160px;">
+                                        <span class="btn-text">Enviar Solicitud</span>
+                                        <span class="btn-loading" style="display: none;">
+                                            <i class="fi-rs-loading" style="animation: spin 1s linear infinite;"></i> Enviando...
+                                        </span>
+                                    </button>
+                                </form>
+
+                                <style>
+                                    .partner-form {
+                                        background: transparent !important;
+                                    }
+                                    
+                                    .partner-form .form-input,
+                                    .partner-form .form-select,
+                                    .partner-form .whatsapp-input {
+                                        background: white !important;
+                                    }
+                                    
+                                    .partner-form .form-input:focus, 
+                                    .partner-form .form-select:focus, 
+                                    .partner-form .whatsapp-input:focus-within {
+                                        border-color: #3BB77E !important;
+                                        box-shadow: 0 0 0 2px rgba(59, 183, 126, 0.2);
+                                        background: white !important;
+                                    }
+                                    
+                                    .partner-form .form-input.error, 
+                                    .partner-form .form-select.error,
+                                    .partner-form .whatsapp-input:has(.error) {
+                                        border-color: #dc3545 !important;
+                                        box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2);
+                                        background: white !important;
+                                    }
+                                    
+                                    .partner-submit-btn:hover {
+                                        background: #2a9d62 !important;
+                                        transform: translateY(-1px);
+                                        box-shadow: 0 4px 12px rgba(59, 183, 126, 0.3);
+                                    }
+                                    
+                                    .partner-submit-btn:disabled {
+                                        background: #ccc !important;
+                                        cursor: not-allowed !important;
+                                        transform: none !important;
+                                        box-shadow: none !important;
+                                    }
+                                    
+                                    @keyframes spin {
+                                        0% { transform: rotate(0deg); }
+                                        100% { transform: rotate(360deg); }
+                                    }
+                                    
+                                    @media (max-width: 576px) {
+                                        .partner-form .form-row {
+                                            flex-direction: column;
+                                        }
+                                        .partner-form .whatsapp-input {
+                                            max-width: 200px;
+                                        }
+                                    }
+                                </style>
+
+                                <script>
+                                    function validatePartnerForm(form) {
+                                        const submitBtn = form.querySelector('.partner-submit-btn');
+                                        const btnText = submitBtn.querySelector('.btn-text');
+                                        const btnLoading = submitBtn.querySelector('.btn-loading');
+                                        
+                                        // Mostrar estado de carga
+                                        submitBtn.disabled = true;
+                                        btnText.style.display = 'none';
+                                        btnLoading.style.display = 'inline';
+                                        
+                                        // Validar WhatsApp
+                                        const whatsapp = form.whatsapp.value;
+                                        if (!/^[0-9]{9}$/.test(whatsapp)) {
+                                            alert('El número de WhatsApp debe tener exactamente 9 dígitos.');
+                                            resetButton();
+                                            return false;
+                                        }
+                                        
+                                        // Validar que el WhatsApp no empiece con 0
+                                        if (whatsapp.startsWith('0')) {
+                                            alert('El número de WhatsApp no debe empezar con 0.');
+                                            resetButton();
+                                            return false;
+                                        }
+                                        
+                                        function resetButton() {
+                                            submitBtn.disabled = false;
+                                            btnText.style.display = 'inline';
+                                            btnLoading.style.display = 'none';
+                                        }
+                                        
+                                        return true;
+                                    }
+                                    
+                                    // Auto-formatear WhatsApp mientras se escribe
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const whatsappInput = document.querySelector('input[name="whatsapp"]');
+                                        if (whatsappInput) {
+                                            whatsappInput.addEventListener('input', function(e) {
+                                                // Solo permitir números y limitar a 9 dígitos
+                                                this.value = this.value.replace(/[^0-9]/g, '').substring(0, 9);
+                                            });
+                                        }
+                                    });
+                                </script>
+                            </div>
+                            <img src="{{ asset('nest-frontend/assets/imgs/banner/banner-9.png') }}" alt="newsletter" />
                         </div>
                     </div>
                 </div>
@@ -567,16 +693,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
-                            <div class="logo mb-30">
-                                <a href="{{ route('catalogo.index') }}" class="mb-15">
-                                    <img src="{{ asset('nest-frontend/assets/imgs/theme/Logofinal_horizontal.png') }}" alt="logo" />
-                                </a>
-                                <p class="font-lg text-heading">{{ config('app.name') }} - Tu tienda de confianza</p>
-                            </div>
+                             <h4 class="widget-title">Información de Contacto</h4>
                             <ul class="contact-infor">
-                                <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Dirección: </strong> <span>Tu dirección aquí</span></li>
-                                <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Teléfono:</strong><span>(+123) 456-7890</span></li>
-                                <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-email-2.svg') }}" alt="" /><strong>Email:</strong><span>info@sosmandelo.com</span></li>
+                                <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Teléfono:</strong><span>+51 987654321</span></li>
+                                <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-email-2.svg') }}" alt="" /><strong>Email:</strong><span>sosmandelo@sosmandelo.com</span></li>
                                 <li><img src="{{ asset('nest-frontend/assets/imgs/theme/icons/icon-clock.svg') }}" alt="" /><strong>Horario:</strong><span>10:00 - 18:00, Lun - Sáb</span></li>
                             </ul>
                         </div>
@@ -585,58 +705,31 @@
                         <h4 class="widget-title">Compañía</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="#">Nosotros</a></li>
-                            <li><a href="#">Información de Entrega</a></li>
-                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Información de entrega</a></li>
+                            <li><a href="#">Política de privacidad</a></li>
                             <li><a href="#">Términos y Condiciones</a></li>
                             <li><a href="#">Contáctanos</a></li>
-                            <li><a href="#">Centro de Soporte</a></li>
-                            <li><a href="#">Carreras</a></li>
+                            <li><a href="#">Preguntas frecuentes</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Cuenta</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Iniciar Sesión</a></li>
-                            <li><a href="{{ route('cart.index') }}">Ver Carrito</a></li>
-                            <li><a href="#">Mi Lista de Deseos</a></li>
-                            <li><a href="#">Rastrear Pedido</a></li>
-                            <li><a href="#">Ticket de Ayuda</a></li>
-                            <li><a href="#">Detalles de Envío</a></li>
-                            <li><a href="#">Comparar Productos</a></li>
-                        </ul>
-                    </div>
+                   
                     <div class="footer-link-widget col">
                         <h4 class="widget-title">Corporativo</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Conviértete en Vendedor</a></li>
-                            <li><a href="#">Programa de Afiliados</a></li>
-                            <li><a href="#">Negocio Agrícola</a></li>
-                            <li><a href="#">Carreras Agrícolas</a></li>
-                            <li><a href="#">Nuestros Proveedores</a></li>
-                            <li><a href="#">Accesibilidad</a></li>
-                            <li><a href="#">Promociones</a></li>
+                            <li><a href="#">Conviértete en proveedor o repartidor</a></li>
+
+                            <li><a href="#">Solicita tu factura aquí</a></li>
+                        
                         </ul>
                     </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Popular</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            @php
-                                $popularCategories = \App\Models\Category::where('status', 'active')->take(7)->get();
-                            @endphp
-                            @foreach($popularCategories as $category)
-                                <li><a href="{{ route('catalogo.index', ['categoria' => $category->id]) }}">{{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="footer-link-widget widget-install-app col">
+                    
+                    <div class="footer-link-widget widget-install-app col text-center">
                         <h4 class="widget-title">Instalar App</h4>
                         <p class="wow fadeIn animated">Desde App Store o Google Play</p>
-                        <div class="download-app">
+                        <div class="download-app d-flex justify-content-center flex-wrap gap-2">
                             <a href="#" class="hover-up mb-sm-2 mb-lg-0"><img class="active" src="{{ asset('nest-frontend/assets/imgs/theme/app-store.jpg') }}" alt="" /></a>
                             <a href="#" class="hover-up mb-sm-2"><img src="{{ asset('nest-frontend/assets/imgs/theme/google-play.jpg') }}" alt="" /></a>
                         </div>
-                        <p class="mb-20">Pasarelas de Pago Seguras</p>
-                        <img class="wow fadeIn animated" src="{{ asset('nest-frontend/assets/imgs/theme/payment-method.png') }}" alt="" />
                     </div>
                 </div>
             </div>

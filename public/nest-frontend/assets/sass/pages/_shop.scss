@@ -207,9 +207,9 @@
 		}
 	}
 	.product-content-wrap {
-		padding: 0 20px 20px 20px;
+		padding: 0 15px 15px 15px;
 		.product-category {
-			margin-bottom: 5px;
+			margin-bottom: 3px;
 			a {
 				color: $color-grey-4;
 				font-size: 12px;
@@ -221,7 +221,7 @@
 		h2 {
 			font-size: 16px;
 			font-weight: 700;
-			margin-bottom: 5px;
+			margin-bottom: 3px;
 			a {
 				color: $color-heading;
 				&:hover {
@@ -230,7 +230,7 @@
 			}
 		}
 		.product-price {
-			padding-top: 5px;
+			padding-top: 2px;
 			span {
 				font-size: 18px;
 				font-weight: bold;
@@ -290,17 +290,17 @@
 	.product-card-bottom {
 		display: flex;
 		justify-content: space-between;
-		margin-top: 15px;
+		margin-top: 5px;
 		.add-cart {
 			cursor: pointer;
 			.add {
 				position: relative;
 				display: inline-block;
 				/* reduced horizontal padding to make the button narrower */
-				padding: 6px 10px;
+				padding: 5px 8px;
 				border-radius: 4px;
 				background-color: $background-3;
-				font-size: 14px;
+				font-size: 13px;
 				font-weight: 700;
 				&:hover {
 					background-color: $color-brand;
@@ -388,10 +388,7 @@
 					}
 				}
 			}
-			.product-action-1 {
-				opacity: 1;
-				visibility: visible;
-			}
+
 		}
 		.product-img-zoom {
 			a {
