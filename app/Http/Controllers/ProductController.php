@@ -313,11 +313,24 @@ class ProductController extends Controller
 
         $products = $query->paginate(12);
 
-        // Obtener todas las categorías, subcategorías y marcas para los filtros
+        // Obtener todas las categorías para el carrusel
         $categories = Category::where('status', 'active')->orderBy('name', 'asc')->get();
-        $subcategories = Subcategory::where('status', 'active')->orderBy('name', 'asc')->get();
+        
+        // Obtener subcategorías filtradas por la categoría seleccionada
+        $subcategoriesQuery = Subcategory::where('status', 'active');
+        if ($request->has('categoria')) {
+            $subcategoriesQuery->where('category_id', $request->categoria);
+        }
+        $subcategories = $subcategoriesQuery->orderBy('name', 'asc')->get();
+        
+        // Obtener categoría seleccionada para mostrar información adicional
+        $selectedCategory = null;
+        if ($request->has('categoria')) {
+            $selectedCategory = Category::find($request->categoria);
+        }
+
         $brands = Brand::where('status', 'active')->orderBy('name', 'asc')->get();
 
-        return view('catalog.index', compact('products', 'categories', 'subcategories', 'brands'));
+        return view('catalog.index', compact('products', 'categories', 'subcategories', 'brands', 'selectedCategory'));
     }
 }

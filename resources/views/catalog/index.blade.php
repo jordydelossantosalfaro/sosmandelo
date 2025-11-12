@@ -110,6 +110,37 @@
                     </h2>
                 </div>
 
+                <!-- Filtro por subcategoría -->
+                @if(request()->has('categoria') && $subcategories->count() > 0)
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <h6 class="mb-0 me-3" style="color:#253D4E; font-weight:500;">Filtrar por subcategoría:</h6>
+                        @if(request()->has('subcategoria'))
+                            <a href="{{ route('catalogo.index', ['categoria' => request()->categoria]) }}" 
+                               class="btn btn-sm btn-outline-secondary" style="font-size:0.8rem;">
+                                <i class="fi-rs-cross-small me-1"></i>Limpiar filtro
+                            </a>
+                        @endif
+                    </div>
+                    <div class="subcategory-filter" style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin;">
+                        @foreach($subcategories as $subcategory)
+                            @php
+                                $isActive = request()->subcategoria == $subcategory->id;
+                                $url = route('catalogo.index', array_merge(request()->query(), ['subcategoria' => $subcategory->id]));
+                            @endphp
+                            <a href="{{ $url }}" 
+                               class="subcategory-btn" 
+                               style="display:inline-flex; align-items:center; padding:0.5rem 1rem; border:1px solid {{ $isActive ? '#28a745' : '#dee2e6' }}; border-radius:20px; text-decoration:none; color:{{ $isActive ? 'white' : '#6c757d' }}; background-color:{{ $isActive ? '#28a745' : 'white' }}; font-size:0.9rem; font-weight:500; white-space:nowrap; transition:all 0.3s ease;"
+                               onmouseover="if(!this.classList.contains('active')) { this.style.borderColor='#28a745'; this.style.color='#28a745'; }"
+                               onmouseout="if(!this.classList.contains('active')) { this.style.borderColor='#dee2e6'; this.style.color='#6c757d'; }"
+                               {{ $isActive ? 'class=active' : '' }}>
+                                {{ $subcategory->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
+
                 <!--End nav-tabs-->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tab-all">
